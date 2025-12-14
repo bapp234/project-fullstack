@@ -1,0 +1,15 @@
+name: Auto Deploy to Render
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Render Backend Hook
+        run: curl -X POST ${{ secrets.RENDER_HOOK_SERVER }}
+        
+      - name: Call Render Client Hook
+        run: curl -X POST ${{ secrets.RENDER_HOOK_CLIENT }}
